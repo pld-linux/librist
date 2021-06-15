@@ -1,20 +1,19 @@
 Summary:	Reliable Internet Stream Transport (RIST)
 Summary(pl.UTF-8):	Reliable Internet Stream Transport (RIST) - niezawodny internetowy protokół strumieniowy
 Name:		librist
-Version:	0.2.0
-%define	subver	RC6
-%define	rel	1
-Release:	0.%{subver}.%{rel}
+Version:	0.2.1
+Release:	1
 License:	BSD
 Group:		Libraries
 #Source0Download: https://code.videolan.org/rist/librist/-/tags
-Source0:	https://code.videolan.org/rist/librist/-/archive/v%{version}-%{subver}/librist-v%{version}-%{subver}.tar.bz2
-# Source0-md5:	87a7b2b7c6ed885b7b1ff71e940b2df6
+Source0:	https://code.videolan.org/rist/librist/-/archive/v%{version}/librist-v%{version}.tar.bz2
+# Source0-md5:	03b79beae3603bc050f5ea35ac676962
 URL:		https://code.videolan.org/rist/librist
 BuildRequires:	cjson-devel
 BuildRequires:	meson >= 0.51.0
 BuildRequires:	ninja >= 1.5
-BuildRequires:	lz4-devel
+# disabled in sources (as of 0.2.1)
+#BuildRequires:	lz4-devel
 BuildRequires:	mbedtls-devel
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -33,7 +32,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki RIST
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cjson-devel
-Requires:	lz4-devel
+#Requires:	lz4-devel
 Requires:	mbedtls-devel
 
 %description devel
@@ -55,7 +54,7 @@ Static RIST library.
 Statyczna biblioteka RIST.
 
 %prep
-%setup -q -n librist-v%{version}-%{subver}
+%setup -q -n librist-v%{version}
 
 %build
 %meson build \
