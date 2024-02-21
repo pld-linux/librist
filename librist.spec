@@ -1,19 +1,21 @@
 Summary:	Reliable Internet Stream Transport (RIST)
 Summary(pl.UTF-8):	Reliable Internet Stream Transport (RIST) - niezawodny internetowy protokół strumieniowy
 Name:		librist
-Version:	0.2.7
+Version:	0.2.10
 Release:	1
 License:	BSD
 Group:		Libraries
 #Source0Download: https://code.videolan.org/rist/librist/-/tags
 Source0:	https://code.videolan.org/rist/librist/-/archive/v%{version}/librist-v%{version}.tar.bz2
-# Source0-md5:	447118a2f37d93729c2b522199fe71cf
+# Source0-md5:	eaeec0397468014f51e182a2509632ba
 URL:		https://code.videolan.org/rist/librist
 BuildRequires:	cjson-devel
+BuildRequires:	libmicrohttpd-devel
 BuildRequires:	meson >= 0.51.0
 BuildRequires:	ninja >= 1.5
 # disabled in sources (as of 0.2.6)
 #BuildRequires:	lz4-devel
+# or gnutls with -Duse_mbledtls=false -Duse_gnutls=true
 BuildRequires:	mbedtls-devel
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
