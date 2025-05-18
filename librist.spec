@@ -1,23 +1,24 @@
 Summary:	Reliable Internet Stream Transport (RIST)
 Summary(pl.UTF-8):	Reliable Internet Stream Transport (RIST) - niezawodny internetowy protokół strumieniowy
 Name:		librist
-Version:	0.2.10
+Version:	0.2.11
 Release:	1
 License:	BSD
 Group:		Libraries
 #Source0Download: https://code.videolan.org/rist/librist/-/tags
 Source0:	https://code.videolan.org/rist/librist/-/archive/v%{version}/librist-v%{version}.tar.bz2
-# Source0-md5:	eaeec0397468014f51e182a2509632ba
+# Source0-md5:	a6009856d46c020e07fc717351cb887b
 URL:		https://code.videolan.org/rist/librist
 BuildRequires:	cjson-devel
 BuildRequires:	libmicrohttpd-devel
 BuildRequires:	meson >= 0.51.0
 BuildRequires:	ninja >= 1.5
-# disabled in sources (as of 0.2.6)
+# disabled in sources (as of 0.2.6 .. 0.2.11)
 #BuildRequires:	lz4-devel
 # or gnutls with -Duse_mbledtls=false -Duse_gnutls=true
+# or nettle with -Duse_mbledtls=false -Duse_nettle=true
 BuildRequires:	mbedtls-devel
-BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -59,15 +60,15 @@ Statyczna biblioteka RIST.
 %setup -q -n librist-v%{version}
 
 %build
-%meson build \
+%meson \
 	-Dfallback_builtin=false
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
