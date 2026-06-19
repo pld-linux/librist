@@ -1,22 +1,21 @@
 Summary:	Reliable Internet Stream Transport (RIST)
 Summary(pl.UTF-8):	Reliable Internet Stream Transport (RIST) - niezawodny internetowy protokół strumieniowy
 Name:		librist
-Version:	0.2.11
+Version:	0.2.17
 Release:	1
 License:	BSD
 Group:		Libraries
 #Source0Download: https://code.videolan.org/rist/librist/-/tags
 Source0:	https://code.videolan.org/rist/librist/-/archive/v%{version}/librist-v%{version}.tar.bz2
-# Source0-md5:	a6009856d46c020e07fc717351cb887b
+# Source0-md5:	345aca6941108d733b4e88ba50fc359b
 URL:		https://code.videolan.org/rist/librist
 BuildRequires:	cjson-devel
+BuildRequires:	gcc >= 5:3.2
 BuildRequires:	libmicrohttpd-devel
 BuildRequires:	meson >= 0.51.0
 BuildRequires:	ninja >= 1.5
-# disabled in sources (as of 0.2.6 .. 0.2.11)
-#BuildRequires:	lz4-devel
+BuildRequires:	lz4-devel
 # or gnutls with -Duse_mbledtls=false -Duse_gnutls=true
-# or nettle with -Duse_mbledtls=false -Duse_nettle=true
 BuildRequires:	mbedtls-devel
 BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -35,7 +34,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki RIST
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cjson-devel
-#Requires:	lz4-devel
+Requires:	lz4-devel
 Requires:	mbedtls-devel
 
 %description devel
@@ -83,12 +82,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/ristreceiver
 %attr(755,root,root) %{_bindir}/ristsender
 %attr(755,root,root) %{_bindir}/ristsrppasswd
-%attr(755,root,root) %{_libdir}/librist.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/librist.so.4
+%attr(755,root,root) %{_bindir}/risttunnel
+%attr(755,root,root) %{_bindir}/udp2udp
+%{_libdir}/librist.so.*.*.*
+%ghost %{_libdir}/librist.so.4
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/librist.so
+%{_libdir}/librist.so
 %{_includedir}/librist
 %{_pkgconfigdir}/librist.pc
 
